@@ -4,7 +4,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"start": "node src/index.js",
-		"dev": "source .env.development && node src/index.js"
+		"dev": "source .env && node src/index.js"
 	},
 	"author": "Mees van Dijk <mees@mees.io> (https://mees.io/)",
 	"license": "MIT",
