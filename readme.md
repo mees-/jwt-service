@@ -7,9 +7,12 @@ validate them
 
 #### Connection string
 
-make sure to set `CONNECTION_STRING` to some connection string to store in
-database, the service uses [keyv](https://github.com/lukechilds/keyv) to store
-data
+make sure to set `CONNECTION_STRING` to some connection string if you want to
+store users in a database, the service uses
+[keyv](https://github.com/lukechilds/keyv) to store data. If you want to store
+data in a database you will also need to install an
+[adapter for keyv](https://github.com/lukechilds/keyv#official-storage-adapters)
+.
 
 #### setup database
 
