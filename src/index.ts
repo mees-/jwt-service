@@ -1,10 +1,9 @@
 import express, { RequestHandler } from "express"
-import getPort from "get-port"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import bodyParser from "body-parser"
 import morgan from "morgan"
-import { secret, issuer, audience, expiresIn } from "./config"
+import { secret, issuer, audience, expiresIn, port } from "./config"
 
 import userRouter, { getUser } from "./user"
 
@@ -77,8 +76,5 @@ app.get("/validate", async (req, res) => {
 })
 
 // start the server
-;(async () => {
-	const port = await getPort({ port: 5000 })
-	console.log(`port: ${port}`)
-	app.listen(port)
-})()
+console.log(`port: ${port}`)
+app.listen(port)

@@ -3,7 +3,7 @@ import Keyv from "keyv"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { merge } from "merge-anything"
-import { secret, audience, issuer } from "./config"
+import { secret, audience, issuer, connectionString } from "./config"
 
 const SALT_ROUNDS = 10
 
@@ -28,7 +28,7 @@ type UserWithPassword = User & {
 	password: string
 }
 
-const users = new Keyv<UserWithHash>(process.env.CONNECTION_STRING, {
+const users = new Keyv<UserWithHash>(connectionString, {
 	namespace: "user",
 })
 export const getUser = users.get.bind(users)
