@@ -3,32 +3,38 @@ import Keyv from "keyv"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { merge } from "merge-anything"
-import { secret, audience, issuer, connectionString } from "./config"
+import {
+	secret,
+	audience,
+	issuer,
+	connectionString,
+	saltRounds,
+} from "./config"
 
-const SALT_ROUNDS = 10
-
-enum Role {
+export enum Role {
 	Create = "CREATE",
 	Read = "READ",
 	Update = "UPDATE",
 	Delete = "DELETE",
 }
 
-type User = {
+export type User = {
 	id: string
 	data: any
 	roles: Role[]
 }
 
-type UserWithHash = User & {
+export type UserWithHash = User & {
 	hash: string
 }
 
-type UserWithPassword = User & {
+export type DatabaseUser = UserWithHash
+
+export type UserWithPassword = User & {
 	password: string
 }
 
-const users = new Keyv<UserWithHash>(connectionString, {
+export const users = new Keyv<UserWithHash>(connectionString, {
 	namespace: "user",
 })
 export const getUser = users.get.bind(users)
@@ -100,8 +106,8 @@ userRouter.post(
 			res.status(403)
 			res.send("Error: cannot create user")
 		} else {
-			const hash = await bcrypt.hash(password, SALT_ROUNDS)
-			const user: UserWithHash = {
+			const hash = await bcrypt.hash(password, saltRounds)
+			const user: DatabaseUser = {
 				id,
 				hash,
 				data: data ?? {},

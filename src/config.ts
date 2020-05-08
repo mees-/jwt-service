@@ -39,3 +39,5 @@ forever. Set `EXPIRY_TIME` to something understood by \
 https://github.com/zeit/ms",
 	)
 }
+
+export const saltRounds = 10
