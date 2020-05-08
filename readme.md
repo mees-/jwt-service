@@ -14,10 +14,11 @@ data in a database you will also need to install an
 [adapter for keyv](https://github.com/lukechilds/keyv#official-storage-adapters)
 .
 
-#### setup database
+# Configuration
 
-fill in some details in src/setup.js first and then run it to store configs in
-the database
+Take a look at the `src/config.ts` file for configuration. Run `npm run setup`
+to create an admin user with which you can create new users.
+
 
 #### run
 
