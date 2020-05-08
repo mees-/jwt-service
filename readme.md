@@ -3,24 +3,24 @@
 This is a simple microservice that can create users, issue jwt tokens and
 validate them
 
-## Getting started
+## Getting started in docker
 
-#### Connection string
+### Environment variables
 
-make sure to set `CONNECTION_STRING` to some connection string if you want to
-store users in a database, the service uses
-[keyv](https://github.com/lukechilds/keyv) to store data. If you want to store
-data in a database you will also need to install an
-[adapter for keyv](https://github.com/lukechilds/keyv#official-storage-adapters)
-.
+- `CONNECTION_STRING` some postgres connection string. Format:
+  `postgres://user:password@host:port/database_name`
+- `SECRET` the hmac sh256 signing secret
+- `ISSUER` the issuer name on the tokens
+- `AUDIENCE` _optional_: the audience on the tokens
+- `EXPIRY_TIME` _optional_: the time after which a JWT expires. This is parsed
+  with [Zeit/ms](https://github.com/zeit/ms).
+- `PORT` _optional_: _in docker_ this is set to 80 by default
+- `ADMIN_USER` _optional_: set this to set the user id for the admin user.
+  Default: `admin`
+- `ADMIN_PASS`: _optional_: set this to set the password for the admin user.
+  If you don't set this then no admin user is created.
 
-# Configuration
-
-Take a look at the `src/config.ts` file for configuration. Run `npm run setup`
-to create an admin user with which you can create new users.
-
-
-#### run
-
-after that you can run the service with `npm start` or `npm run dev` if you want
-to also source `.env` file
+Setting `ADMIN_PASS` essentially only needs to happen once on first run, since
+the admin user doesn't need to be recreated every time. It is safe to keep it
+set though. If a user with `ADMIN_USER` as username already exists, it won't be
+modified and admin user creation will be skipped.

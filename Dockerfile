@@ -7,5 +7,5 @@ ADD ./tsconfig.json .
 RUN npm install
 
 ENV PORT=80
-
+RUN npm run setup
 CMD ["npm", "start"]
