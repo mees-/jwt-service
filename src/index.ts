@@ -53,6 +53,7 @@ app.get("/token", checkBasicAuth, async (req, res) => {
 			subject: id,
 		})
 		res.status(200)
+		res.set("Content-Type", "application/jwt")
 		res.send(token)
 	} else {
 		res.set("WWW-Authenticate", "Basic")
